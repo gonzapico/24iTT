@@ -10,6 +10,12 @@ public class MovieModel {
   private String poster = "";
   private String overview = "";
 
+  public MovieModel(int id, String poster, String overview) {
+    this.id = id;
+    this.poster = poster;
+    this.overview = overview;
+  }
+
   public int getId() {
     return id;
   }

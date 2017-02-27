@@ -34,7 +34,10 @@ ext {
 
   presentationTestDependencies = []
 
-  domainDependencies = []
+  domainDependencies = [daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                        dagger         : "com.google.dagger:dagger:${daggerVersion}",
+                        javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+                        rxJava         : "io.reactivex:rxjava:${rxJavaVersion}"]
 
   dataDependencies = [retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
                       retrofitConverter : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",

@@ -16,6 +16,7 @@
 package xyz.gonzapico.executor;
 
 import java.util.concurrent.Executor;
+import xyz.gonzapico.interactor.BaseUseCase;
 
 /**
  * Executor implementation can be based on different frameworks or techniques of asynchronous

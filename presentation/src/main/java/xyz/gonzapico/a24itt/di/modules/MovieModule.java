@@ -1,15 +1,11 @@
 package xyz.gonzapico.a24itt.di.modules;
 
-import com.elconfidencial.app.di.PerActivity;
-import com.elconfidencial.domain.app.interactor.BaseUseCase;
-import com.elconfidencial.domain.app.interactor.GetNew;
-import com.elconfidencial.domain.app.interactor.GetNews;
-import com.elconfidencial.domain.app.interactor.GetRelatedNews;
-import com.elconfidencial.domain.app.interactor.GetTagNews;
-import com.elconfidencial.domain.app.interactor.GetVideo;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;
+import xyz.gonzapico.a24itt.di.PerActivity;
+import xyz.gonzapico.interactor.BaseUseCase;
+import xyz.gonzapico.interactor.GetPopularMovies;
 
 /**
  * Created by gfernandez on 31/10/16.
@@ -20,24 +16,8 @@ import javax.inject.Named;
 
   }
 
-  @Provides @PerActivity @Named("new") BaseUseCase provideGetNewUseCase(GetNew getNew) {
-    return getNew;
-  }
-
-  @Provides @PerActivity @Named("news") BaseUseCase provideGetNewsUseCase(GetNews getNews) {
-    return getNews;
-  }
-
-  @Provides @PerActivity @Named("relatedNews") BaseUseCase provideGetRelatedNewsUseCase(
-      GetRelatedNews getRelatedNews) {
-    return getRelatedNews;
-  }
-
-  @Provides @PerActivity @Named("video") BaseUseCase provideGetVideo(GetVideo getVideo) {
-    return getVideo;
-  }
-
-  @Provides @PerActivity @Named("tag") BaseUseCase provideGetTagNews(GetTagNews getTags) {
-    return getTags;
+  @Provides @PerActivity @Named("popularMovies") BaseUseCase provideGetPopularMoviesUseCase(
+      GetPopularMovies getPopularMovies) {
+    return getPopularMovies;
   }
 }

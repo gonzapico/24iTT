@@ -1,4 +1,14 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+  }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
   compileSdkVersion 25
@@ -34,4 +44,25 @@ dependencies {
   compile 'com.android.support:design:25.2.0'
   compile 'com.github.bumptech.glide:glide:3.7.0'
   compile 'com.android.support:support-v4:25.2.0'
+  compile project(':domain')
+  compile project(':data')
+  /*** Dependencies for development ***/
+  def presentationDependencies = rootProject.ext.presentationDependencies
+
+  // Dagger 2
+  apt presentationDependencies.dagger
+  compile presentationDependencies.daggerCompiler
+  compile presentationDependencies.javaxGlassfish
+
+  /*** Dependencies for tests ***/
+  def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+  // Dependencies for tests
+  testCompile presentationTestDependencies.mockito
+  androidTestCompile presentationTestDependencies.dexmaker
+  androidTestCompile presentationTestDependencies.dexmakerMockito
+
+  testCompile presentationTestDependencies.mockito
+  testCompile presentationTestDependencies.espresso
+  testCompile presentationTestDependencies.testingSupportLib
 }

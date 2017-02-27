@@ -8,7 +8,7 @@ import xyz.gonzapico.entity.MovieDomainEntity;
  * Created by gfernandez on 27/02/17.
  */
 
-public interface MoviesRepository {
+public interface MoviesDomainRepository {
 
   Observable<List<MovieDomainEntity>> getPopularMovies();
 }

@@ -1,6 +1,5 @@
 package xyz.gonzapico.a24itt.listPopularMovies;
 
-import android.graphics.Movie;
 import java.util.List;
 
 /**

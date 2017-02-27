@@ -10,7 +10,7 @@ public class MovieModel {
   private String poster = "";
   private String overview = "";
 
-  public MovieModel(int id, String poster, String overview) {
+  public MovieModel(int id, String overview, String poster) {
     this.id = id;
     this.poster = poster;
     this.overview = overview;

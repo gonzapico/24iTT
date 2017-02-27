@@ -23,11 +23,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import xyz.gonzapico.executor.ThreadExecutor;
 
 /**
  * Decorated {@link ThreadPoolExecutor}
  */
-@Singleton public class JobExecutor {
+@Singleton public class JobExecutor implements ThreadExecutor {
 
   private static final int INITIAL_POOL_SIZE = 3;
   private static final int MAX_POOL_SIZE = 5;
@@ -52,12 +53,12 @@ import javax.inject.Singleton;
             KEEP_ALIVE_TIME_UNIT, this.workQueue, this.threadFactory);
   }
 
-  //@Override public void execute(Runnable runnable) {
-  //  if (runnable == null) {
-  //    throw new IllegalArgumentException("Runnable to execute cannot be null");
-  //  }
-  //  this.threadPoolExecutor.execute(runnable);
-  //}
+  @Override public void execute(Runnable runnable) {
+    if (runnable == null) {
+      throw new IllegalArgumentException("Runnable to execute cannot be null");
+    }
+    this.threadPoolExecutor.execute(runnable);
+  }
 
   private static class JobThreadFactory implements ThreadFactory {
     private static final String THREAD_NAME = "android_";

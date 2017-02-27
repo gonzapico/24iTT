@@ -1,10 +1,12 @@
 
 package xyz.gonzapico.data.entity;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class MovieEntity {
 
+    @SerializedName("poster_path")
     private String posterPath;
     private Boolean adult;
     private String overview;

@@ -1,11 +1,13 @@
 
 package xyz.gonzapico.data.entity;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class MovieAPIResponse {
 
     private Integer page;
+    @SerializedName("results")
     private List<MovieEntity> movieEntities = null;
     private Integer totalResults;
     private Integer totalPages;

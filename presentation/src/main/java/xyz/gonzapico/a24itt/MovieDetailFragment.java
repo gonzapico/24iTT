@@ -19,6 +19,9 @@ public class MovieDetailFragment extends Base24Fragment {
   private static final String MOVIE_DETAIL = "movie_detail";
   ImageView ivPosterHeader;
   TextView tvTitle;
+  TextView tvOverview;
+  TextView tvDate;
+  TextView tvGenres;
   private MovieModel movieModelDetail;
 
   public MovieDetailFragment() {
@@ -41,6 +44,9 @@ public class MovieDetailFragment extends Base24Fragment {
     ButterKnife.bind(this, view);
     tvTitle = (TextView) view.findViewById(R.id.tvMovieTitle);
     ivPosterHeader = (ImageView) view.findViewById(R.id.ivMoviePosterHeader);
+    tvOverview = (TextView) view.findViewById(R.id.tvOverview);
+    tvDate = (TextView) view.findViewById(R.id.tvDate);
+    tvGenres = (TextView) view.findViewById(R.id.tvGenres);
 
     return view;
   }
@@ -57,6 +63,18 @@ public class MovieDetailFragment extends Base24Fragment {
 
   private void setUpDetailsOfTheMovie(MovieModel movieModelDetail) {
     Glide.with(getActivity()).load(movieModelDetail.getPoster()).into(ivPosterHeader);
-    tvTitle.setText(movieModelDetail.getOverview());
+    tvTitle.setText(movieModelDetail.getTitle());
+    tvOverview.setText(movieModelDetail.getOverview());
+    tvDate.setText(movieModelDetail.getDate());
+
+    int sizeOfGenres = movieModelDetail.getGenres().size();
+    if (sizeOfGenres > 0) {
+      StringBuilder stringBuilder = new StringBuilder(movieModelDetail.getGenres().get(0));
+      for (int i = 1; i < sizeOfGenres; i++) {
+        stringBuilder.append(", ");
+        stringBuilder.append(movieModelDetail.getGenres().get(i));
+      }
+      tvGenres.setText(stringBuilder.toString());
+    }
   }
 }

@@ -26,4 +26,8 @@ import javax.inject.Singleton;
 
     return new CloudMoviesStore(context);
   }
+
+  public GenresDataStore createMemoryGenresDataStore() {
+    return new MemoryGenresStore(context);
+  }
 }

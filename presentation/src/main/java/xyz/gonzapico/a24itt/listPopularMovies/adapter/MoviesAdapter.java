@@ -31,7 +31,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
   @Override public void onBindViewHolder(MovieViewHolder holder, int position) {
     final MovieModel popularMovie = movies.get(position);
-    holder.tvMovieTitle.setText(popularMovie.getOverview());
+    holder.tvMovieTitle.setText(popularMovie.getTitle());
     Glide.with(mContext).load(popularMovie.getPoster()).into(holder.ivMoviePoster);
     holder.cvMovie.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {

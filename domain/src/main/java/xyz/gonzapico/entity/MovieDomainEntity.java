@@ -12,7 +12,7 @@ public class MovieDomainEntity {
   private Boolean adult;
   private String overview;
   private String releaseDate;
-  private List<Integer> genreIds = null;
+  private List<String> genreNames = null;
   private Integer id;
   private String originalTitle;
   private String originalLanguage;
@@ -55,12 +55,12 @@ public class MovieDomainEntity {
     this.releaseDate = releaseDate;
   }
 
-  public List<Integer> getGenreIds() {
-    return genreIds;
+  public List<String> getGenreNames() {
+    return genreNames;
   }
 
-  public void setGenreIds(List<Integer> genreIds) {
-    this.genreIds = genreIds;
+  public void setGenreNames(List<String> genreNames) {
+    this.genreNames = genreNames;
   }
 
   public Integer getId() {

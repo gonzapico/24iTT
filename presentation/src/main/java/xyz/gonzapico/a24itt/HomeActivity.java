@@ -1,15 +1,16 @@
 package xyz.gonzapico.a24itt;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import butterknife.BindView;
 import xyz.gonzapico.a24itt.di.HasComponent;
 import xyz.gonzapico.a24itt.di.components.DaggerMovieComponent;
 import xyz.gonzapico.a24itt.di.components.MovieComponent;
-import xyz.gonzapico.a24itt.listPopularMovies.ListPopularMoviesPresenter;
+import xyz.gonzapico.a24itt.listPopularMovies.MovieModel;
+import xyz.gonzapico.a24itt.navigation.Navigator;
 
-public class HomeActivity extends Base24Activity implements HasComponent<MovieComponent> {
+public class HomeActivity extends Base24Activity
+    implements ShowPopularMoviesFragment.MovieListListener, HasComponent<MovieComponent> {
   private MovieComponent mMovieComponent;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -32,5 +33,12 @@ public class HomeActivity extends Base24Activity implements HasComponent<MovieCo
         .applicationComponent(getApplicationComponent())
         .activityModule(getActivityModule())
         .build();
+  }
+
+  @Override public void onMovieClicked(MovieModel movieModel) {
+    if (this.mNavigator == null){
+      this.mNavigator = new Navigator();
+    }
+    this.mNavigator.navigateToMovieDetail(this, movieModel);
   }
 }

@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import xyz.gonzapico.a24itt.di.PerActivity;
 import xyz.gonzapico.a24itt.listPopularMovies.mapper.DomainMovieMapper;
-import xyz.gonzapico.data.entity.mapper.MovieMapper;
 import xyz.gonzapico.entity.MovieDomainEntity;
 import xyz.gonzapico.exception.DefaultErrorBundle;
 import xyz.gonzapico.interactor.BaseUseCase;
@@ -33,6 +32,10 @@ import xyz.gonzapico.interactor.DefaultSubscriber;
   private void renderListOfMovies(List<MovieDomainEntity> listOfMoviesEntityDomain) {
     listPopularMoviesView.showPopularMovies(
         domainMovieMapper.transformListOfMovies(listOfMoviesEntityDomain));
+  }
+
+  public void onMovieClicked(MovieModel movieModel) {
+    this.listPopularMoviesView.viewMovie(movieModel);
   }
 
   private List<MovieModel> getFakePopularMovies() {

@@ -1,5 +1,6 @@
 package xyz.gonzapico.a24itt;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,9 +23,17 @@ import xyz.gonzapico.a24itt.listPopularMovies.adapter.MoviesAdapter;
 
 public class ShowPopularMoviesFragment extends Base24Fragment implements ListPopularMoviesView {
 
+  /**
+   * Interface for listening movie list events.
+   */
+  public interface MovieListListener {
+    void onMovieClicked(final MovieModel movieModel);
+  }
+
   @Inject ListPopularMoviesPresenter listPopularMoviesPresenter;
 
   RecyclerView rvMovies;
+  private MovieListListener movieListListener;
 
   public ShowPopularMoviesFragment() {
     setRetainInstance(true);
@@ -33,6 +42,14 @@ public class ShowPopularMoviesFragment extends Base24Fragment implements ListPop
   public static ShowPopularMoviesFragment newInstance() {
     ShowPopularMoviesFragment fragment = new ShowPopularMoviesFragment();
     return fragment;
+  }
+
+  @Override public void onAttach(Context context) {
+    super.onAttach(context);
+
+    if (getActivity() instanceof MovieListListener){
+      movieListListener = (MovieListListener) getActivity();
+    }
   }
 
   @Override public void onCreate(Bundle savedInstanceState) {
@@ -68,10 +85,26 @@ public class ShowPopularMoviesFragment extends Base24Fragment implements ListPop
 
   private void setUpAdapter(List<MovieModel> popularMovies) {
     MoviesAdapter moviesAdapter = new MoviesAdapter(popularMovies);
+    moviesAdapter.setOnItemClickListener(onItemClickListener);
     rvMovies.setAdapter(moviesAdapter);
   }
 
   @Override public void showPopularMovies(List<MovieModel> listOfMovies) {
     setUpAdapter(listOfMovies);
   }
+
+  @Override public void viewMovie(MovieModel movieDetail) {
+    if (movieListListener != null){
+      movieListListener.onMovieClicked(movieDetail);
+    }
+  }
+
+  private MoviesAdapter.OnItemClickListener onItemClickListener =
+      new MoviesAdapter.OnItemClickListener() {
+        @Override public void onMovieItemClicked(MovieModel movieModel) {
+          if (ShowPopularMoviesFragment.this.listPopularMoviesPresenter != null && movieModel != null){
+            ShowPopularMoviesFragment.this.listPopularMoviesPresenter.onMovieClicked(movieModel);
+          }
+        }
+      };
 }

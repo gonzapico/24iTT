@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
-import xyz.gonzapico.a24itt.di.components.MovieComponent;
 import xyz.gonzapico.a24itt.listPopularMovies.MovieModel;
 
 /**
@@ -19,12 +17,12 @@ import xyz.gonzapico.a24itt.listPopularMovies.MovieModel;
 public class MovieDetailFragment extends Base24Fragment {
 
   private static final String MOVIE_DETAIL = "movie_detail";
-  ImageView ivPosterHeader;
-  TextView tvTitle;
-  TextView tvOverview;
-  TextView tvDate;
-  TextView tvGenres;
-  Button btnWatchTrailer;
+  private ImageView ivPosterHeader;
+  private TextView tvTitle;
+  private TextView tvOverview;
+  private TextView tvDate;
+  private TextView tvGenres;
+  private Button btnWatchTrailer;
   private MovieModel movieModelDetail;
 
   public MovieDetailFragment() {
@@ -44,7 +42,11 @@ public class MovieDetailFragment extends Base24Fragment {
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_detail_movie, container, false);
-    ButterKnife.bind(this, view);
+    bindViews(view);
+    return view;
+  }
+
+  private void bindViews(View view) {
     tvTitle = (TextView) view.findViewById(R.id.tvMovieTitle);
     ivPosterHeader = (ImageView) view.findViewById(R.id.ivMoviePosterHeader);
     tvOverview = (TextView) view.findViewById(R.id.tvOverview);
@@ -53,18 +55,17 @@ public class MovieDetailFragment extends Base24Fragment {
     btnWatchTrailer = (Button) view.findViewById(R.id.btnWatchTrailer);
     btnWatchTrailer.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        ((Base24Activity)getActivity()).mNavigator.navigateToWatchTrailer(getActivity(), movieModelDetail.getId());
+        ((Base24Activity) getActivity()).mNavigator.navigateToWatchTrailer(getActivity(),
+            movieModelDetail.getId());
       }
     });
-
-    return view;
   }
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
     if (getArguments() != null) {
-      movieModelDetail = (MovieModel) getArguments().getParcelable(MOVIE_DETAIL);
+      movieModelDetail = getArguments().getParcelable(MOVIE_DETAIL);
     }
 
     setUpDetailsOfTheMovie(movieModelDetail);
@@ -75,7 +76,11 @@ public class MovieDetailFragment extends Base24Fragment {
     tvTitle.setText(movieModelDetail.getTitle());
     tvOverview.setText(movieModelDetail.getOverview());
     tvDate.setText(movieModelDetail.getDate());
+    tvGenres.setText(buildGenreList());
+  }
 
+  private String buildGenreList() {
+    String genreList = "";
     int sizeOfGenres = movieModelDetail.getGenres().size();
     if (sizeOfGenres > 0) {
       StringBuilder stringBuilder = new StringBuilder(movieModelDetail.getGenres().get(0));
@@ -83,7 +88,8 @@ public class MovieDetailFragment extends Base24Fragment {
         stringBuilder.append(", ");
         stringBuilder.append(movieModelDetail.getGenres().get(i));
       }
-      tvGenres.setText(stringBuilder.toString());
+      genreList = stringBuilder.toString();
     }
+    return genreList;
   }
 }

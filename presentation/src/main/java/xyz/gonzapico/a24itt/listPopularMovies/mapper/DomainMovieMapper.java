@@ -5,7 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 import xyz.gonzapico.a24itt.di.PerActivity;
 import xyz.gonzapico.a24itt.listPopularMovies.MovieModel;
+import xyz.gonzapico.a24itt.watchTrailer.TrailerModel;
 import xyz.gonzapico.entity.MovieDomainEntity;
+import xyz.gonzapico.entity.TrailerDomainEntity;
 
 /**
  * Created by gfernandez on 27/02/17.
@@ -33,6 +35,21 @@ import xyz.gonzapico.entity.MovieDomainEntity;
       movieEntity.setDate(movieDomainEntity.getReleaseDate());
       movieEntity.setGenres(movieDomainEntity.getGenreNames());
       resultOfTransformation.add(movieEntity);
+    }
+
+    return resultOfTransformation;
+  }
+
+  public List<TrailerModel> transformTrailers(List<TrailerDomainEntity> listOfTrailerDomainEntity) {
+    List<TrailerModel> resultOfTransformation = new ArrayList<>();
+
+    for (TrailerDomainEntity trailerDomainEntity : listOfTrailerDomainEntity) {
+      TrailerModel trailerModel = new TrailerModel();
+
+      trailerModel.setKeyVideo(trailerDomainEntity.getKey());
+      trailerModel.setQualityTrailer(
+          trailerDomainEntity.getName() + " " + trailerDomainEntity.getSize());
+      resultOfTransformation.add(trailerModel);
     }
 
     return resultOfTransformation;

@@ -28,23 +28,18 @@ import xyz.gonzapico.interactor.GetTrailers;
     this.domainMovieMapper = domainMovieMapper;
   }
 
-  public void getTrailers(int idMovie) {
-    ((GetTrailers) this.getTrailersUseCase).setIdMovie(idMovie);
-    getTrailersUseCase.execute(new GetTrailersSuscriber());
-  }
-
   public void getTrailers(TrailerView trailerView, int idMovie) {
     this.trailerView = trailerView;
     ((GetTrailers) this.getTrailersUseCase).setIdMovie(idMovie);
     getTrailersUseCase.execute(new GetTrailersSuscriber());
   }
 
-  public void setTrailerView(TrailerView trailerView) {
-    this.trailerView = trailerView;
+  public void playVideo(String keyVideo) {
+    trailerView.playVideo(keyVideo);
   }
 
-  private void playVideo(String keyVideo) {
-    trailerView.showVideo(keyVideo);
+  private void showChooser(List<TrailerDomainEntity> listOfTrailerDomainEntity) {
+    trailerView.showChooserTrailer(domainMovieMapper.transformTrailers(listOfTrailerDomainEntity));
   }
 
   private final class GetTrailersSuscriber extends DefaultSubscriber<List<TrailerDomainEntity>> {
@@ -61,7 +56,7 @@ import xyz.gonzapico.interactor.GetTrailers;
     }
 
     @Override public void onNext(List<TrailerDomainEntity> trailerDomainEntityList) {
-      GetTrailerPresenter.this.playVideo(trailerDomainEntityList.get(0).getKey());
+      GetTrailerPresenter.this.showChooser(trailerDomainEntityList);
     }
 
     private void showErrorMessage(DefaultErrorBundle errorBundle) {

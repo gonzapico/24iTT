@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import xyz.gonzapico.a24itt.R;
 
 /**
@@ -24,6 +22,5 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
     ivMoviePoster = (ImageView) itemView.findViewById(R.id.ivMoviePoster);
     tvMovieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
     cvMovie = (CardView) itemView.findViewById(R.id.cvMovie);
-    //ButterKnife.bind(this, itemView);
   }
 }

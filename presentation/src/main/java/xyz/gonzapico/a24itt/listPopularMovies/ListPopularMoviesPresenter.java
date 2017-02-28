@@ -40,17 +40,21 @@ import xyz.gonzapico.interactor.DefaultSubscriber;
     this.listPopularMoviesView.viewMovie(movieModel);
   }
 
-  private List<MovieModel> getFakePopularMovies() {
-    return listOfMovies;
-  }
-
-  public void getPopularMovies() {
-    this.getGenresUseCase.execute(new GetGenresSuscriber());
+  private void getPopularMovies() {
     this.getPopularMoviesUseCase.execute(new GetPopularMoviesSuscriber());
   }
 
   public void setListPopularMoviesView(ListPopularMoviesView view) {
     listPopularMoviesView = view;
+  }
+
+  public void getMoviesInformation() {
+    getPopularMovies();
+    getGenres();
+  }
+
+  private void getGenres(){
+    this.getGenresUseCase.execute(new GetGenresSuscriber());
   }
 
   private final class GetPopularMoviesSuscriber extends DefaultSubscriber<List<MovieDomainEntity>> {

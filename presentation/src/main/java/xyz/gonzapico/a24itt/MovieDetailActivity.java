@@ -30,5 +30,7 @@ public class MovieDetailActivity extends Base24Activity {
       addFragment(R.id.fragmentContainer, MovieDetailFragment.newInstance(
           (MovieModel) getIntent().getParcelableExtra(MOVIE_DETAIL)));
     }
+
+    setUpBackArrow();
   }
 }

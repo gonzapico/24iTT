@@ -43,6 +43,7 @@ dependencies {
   compile dataDependencies.retrofitAdapterRx
   compile dataDependencies.okHttpLogging
   compile dataDependencies.glassfishJavax
+  compile dataDependencies.storeNY
 
   def testDependencies = rootProject.ext.dataTestDependencies
 

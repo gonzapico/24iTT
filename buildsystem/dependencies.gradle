@@ -23,6 +23,7 @@ ext {
   androidAnnotationsVersion = '21.0.3'
   retrofitVersion = '2.1.0'
   loggingInterceptorVersion = '3.5.0'
+  storeVersion = '2.0.0'
 
   // Testing
   robolectricVersion = '3.1.2'
@@ -61,7 +62,8 @@ ext {
                       androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
                       retrofitAdapterRx : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
                       okHttpLogging     : "com.squareup.okhttp3:logging-interceptor:${loggingInterceptorVersion}",
-                      glassfishJavax    : "org.glassfish:javax.annotation:${javaxGlassfish}"]
+                      glassfishJavax    : "org.glassfish:javax.annotation:${javaxGlassfish}",
+                      storeNY           : "com.nytimes.android:store:${storeVersion}"]
 
   dataTestDependencies = [junit      : "junit:junit:${jUnitVersion}",
                           assertj    : "org.assertj:assertj-core:${assertJVersion}",

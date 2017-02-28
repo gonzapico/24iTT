@@ -88,6 +88,7 @@ gen-external-apklibs
 # Gradle:
 .idea/gradle.xml
 .idea/libraries
+.idea/sonarlint
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
@@ -165,5 +166,3 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
-=======
->>>>>>> 6ae95500001c723ebdacc0a01106791db2ae2dc9

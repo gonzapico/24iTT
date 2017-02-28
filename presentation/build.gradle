@@ -1,4 +1,14 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+  }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
   compileSdkVersion 25
@@ -21,9 +31,36 @@ android {
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
+  compile files('libs/YouTubeAndroidPlayerApi.jar')
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
   compile 'com.android.support:appcompat-v7:25.2.0'
   testCompile 'junit:junit:4.12'
+  compile 'com.android.support:recyclerview-v7:25.2.0'
+  compile 'com.android.support:cardview-v7:25.2.0'
+  compile 'com.android.support:design:25.2.0'
+  compile 'com.github.bumptech.glide:glide:3.7.0'
+  compile 'com.android.support:support-v4:25.2.0'
+  compile project(':domain')
+  compile project(':data')
+  /*** Dependencies for development ***/
+  def presentationDependencies = rootProject.ext.presentationDependencies
+
+  // Dagger 2
+  apt presentationDependencies.dagger
+  compile presentationDependencies.daggerCompiler
+  compile presentationDependencies.javaxGlassfish
+
+  /*** Dependencies for tests ***/
+  def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+  // Dependencies for tests
+  testCompile presentationTestDependencies.mockito
+  androidTestCompile presentationTestDependencies.dexmaker
+  androidTestCompile presentationTestDependencies.dexmakerMockito
+
+  testCompile presentationTestDependencies.mockito
+  testCompile presentationTestDependencies.espresso
+  testCompile presentationTestDependencies.testingSupportLib
 }

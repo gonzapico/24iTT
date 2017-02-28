@@ -27,6 +27,7 @@ import xyz.gonzapico.entity.MovieDomainEntity;
     for (MovieDomainEntity movieDomainEntity : listOfMoviesDomainEntity) {
       MovieModel movieEntity = new MovieModel();
       movieEntity.setId(movieDomainEntity.getId());
+      movieEntity.setPoster(movieDomainEntity.getPosterPath());
       movieEntity.setTitle(movieDomainEntity.getTitle());
       movieEntity.setOverview(movieDomainEntity.getOverview());
       movieEntity.setDate(movieDomainEntity.getReleaseDate());

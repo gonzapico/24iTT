@@ -1,7 +1,9 @@
 package xyz.gonzapico.a24itt.di.components;
 
 import dagger.Component;
+import xyz.gonzapico.a24itt.MovieDetailFragment;
 import xyz.gonzapico.a24itt.ShowPopularMoviesFragment;
+import xyz.gonzapico.a24itt.WatchTrailerActivity;
 import xyz.gonzapico.a24itt.di.PerActivity;
 import xyz.gonzapico.a24itt.di.modules.ActivityModule;
 import xyz.gonzapico.a24itt.di.modules.MovieModule;
@@ -13,4 +15,6 @@ import xyz.gonzapico.a24itt.di.modules.MovieModule;
     ActivityModule.class, MovieModule.class
 }) public interface MovieComponent extends ActivityComponent {
   void inject(ShowPopularMoviesFragment showPopularMoviesFragment);
+
+  void inject(WatchTrailerActivity watchTrailerActivity);
 }

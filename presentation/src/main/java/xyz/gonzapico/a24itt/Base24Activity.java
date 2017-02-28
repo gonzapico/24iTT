@@ -17,7 +17,7 @@ import xyz.gonzapico.a24itt.navigation.Navigator;
 
 public abstract class Base24Activity extends AppCompatActivity {
 
-  @Inject Navigator mNavigator;
+  Navigator mNavigator = new Navigator();
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

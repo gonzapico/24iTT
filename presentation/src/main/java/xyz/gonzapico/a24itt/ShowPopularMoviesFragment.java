@@ -96,6 +96,8 @@ public class ShowPopularMoviesFragment extends Base24Fragment implements ListPop
   @Override public void viewMovie(MovieModel movieDetail) {
     if (movieListListener != null){
       movieListListener.onMovieClicked(movieDetail);
+    } else {
+      movieListListener = (MovieListListener) getActivity();
     }
   }
 

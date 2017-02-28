@@ -9,9 +9,12 @@ import xyz.gonzapico.data.Config;
 import xyz.gonzapico.data.entity.GenreEntity;
 import xyz.gonzapico.data.entity.MovieAPIGenre;
 import xyz.gonzapico.data.entity.MovieAPIResponse;
+import xyz.gonzapico.data.entity.MovieAPITrailer;
 import xyz.gonzapico.data.entity.MovieEntity;
+import xyz.gonzapico.data.entity.MovieTrailerEntity;
 import xyz.gonzapico.entity.GenreDomainEntity;
 import xyz.gonzapico.entity.MovieDomainEntity;
+import xyz.gonzapico.entity.TrailerDomainEntity;
 
 /**
  * Created by gfernandez on 26/02/17.
@@ -80,5 +83,26 @@ import xyz.gonzapico.entity.MovieDomainEntity;
       }
     }
     return listOfGenreDomainEntity;
+  }
+
+  public List<TrailerDomainEntity> transformToListOfTrailers(
+      Response<MovieAPITrailer> movieAPITrailer) {
+    List<TrailerDomainEntity> resultOfTransformation = null;
+    if (movieAPITrailer.isSuccessful()) {
+      resultOfTransformation = new ArrayList<>();
+
+      List<MovieTrailerEntity> listOfTrailers = movieAPITrailer.body().getListOfVideos();
+
+      for (MovieTrailerEntity entity : listOfTrailers) {
+        TrailerDomainEntity trailerDomainEntity = new TrailerDomainEntity();
+        trailerDomainEntity.setName(entity.getName());
+        trailerDomainEntity.setKey(entity.getKey());
+        trailerDomainEntity.setSize(entity.getSize());
+        trailerDomainEntity.setType(entity.getType());
+
+        resultOfTransformation.add(trailerDomainEntity);
+      }
+    }
+    return resultOfTransformation;
   }
 }

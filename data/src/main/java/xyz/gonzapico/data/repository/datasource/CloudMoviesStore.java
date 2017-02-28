@@ -11,6 +11,7 @@ import xyz.gonzapico.data.di.CloudModule;
 import xyz.gonzapico.data.di.DaggerCloudComponent;
 import xyz.gonzapico.data.entity.MovieAPIGenre;
 import xyz.gonzapico.data.entity.MovieAPIResponse;
+import xyz.gonzapico.data.entity.MovieAPITrailer;
 
 /**
  * Created by gfernandez on 26/02/17.
@@ -48,5 +49,9 @@ public class CloudMoviesStore implements MoviesDataStore {
 
   @Override public Observable<Response<MovieAPIGenre>> genres() {
     return restApi.genres(Config.API_KEY);
+  }
+
+  @Override public Observable<Response<MovieAPITrailer>> trailers(int idMovie) {
+    return restApi.trailers(idMovie, Config.API_KEY);
   }
 }

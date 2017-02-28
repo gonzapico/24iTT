@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import xyz.gonzapico.a24itt.di.components.MovieComponent;
 import xyz.gonzapico.a24itt.listPopularMovies.MovieModel;
 
 /**
@@ -22,6 +24,7 @@ public class MovieDetailFragment extends Base24Fragment {
   TextView tvOverview;
   TextView tvDate;
   TextView tvGenres;
+  Button btnWatchTrailer;
   private MovieModel movieModelDetail;
 
   public MovieDetailFragment() {
@@ -47,6 +50,12 @@ public class MovieDetailFragment extends Base24Fragment {
     tvOverview = (TextView) view.findViewById(R.id.tvOverview);
     tvDate = (TextView) view.findViewById(R.id.tvDate);
     tvGenres = (TextView) view.findViewById(R.id.tvGenres);
+    btnWatchTrailer = (Button) view.findViewById(R.id.btnWatchTrailer);
+    btnWatchTrailer.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        ((Base24Activity)getActivity()).mNavigator.navigateToWatchTrailer(getActivity(), movieModelDetail.getId());
+      }
+    });
 
     return view;
   }

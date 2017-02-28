@@ -14,6 +14,8 @@ import xyz.gonzapico.entity.TrailerDomainEntity;
 import xyz.gonzapico.repository.MoviesDomainRepository;
 
 /**
+ * Boundary between data and domain layer to retrieve movies data information.
+ *
  * Created by gfernandez on 26/02/17.
  */
 
@@ -42,10 +44,5 @@ import xyz.gonzapico.repository.MoviesDomainRepository;
 
   @Override public Observable<List<TrailerDomainEntity>> getTrailers(int idMovie) {
     return moviesDataStore.trailers(idMovie).map(this.movieMapper::transformToListOfTrailers);
-  }
-
-  private void saveGenres(List<GenreDomainEntity> listOfGenreDomainEntity){
-    final GenresDataStore genresDataStore = this.movieDataStoreFactory.createMemoryGenresDataStore();
-    //genresDataStore.saveGenres(this.movieMapper.transformToListOfGenreEntity(listOfGenreDomainEntity));
   }
 }

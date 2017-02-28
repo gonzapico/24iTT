@@ -27,6 +27,10 @@ import javax.inject.Singleton;
     return new CloudMoviesStore(context);
   }
 
+  /***
+   * Create {@link GenresDataStore} to retrieve data from the Memory.
+   * @return
+   */
   public GenresDataStore createMemoryGenresDataStore() {
     return new MemoryGenresStore(context);
   }

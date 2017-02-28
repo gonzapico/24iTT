@@ -14,9 +14,6 @@ public class MemoryGenresStore implements GenresDataStore {
   private Context context;
   private List<GenreEntity> listOfGenres = new ArrayList<>();
 
-  /**
-   * Construct a {@link CloudMoviesStore} based on connections to the api (Cloud).
-   */
   @Inject public MemoryGenresStore(Context context) {
     this.context = context;
   }

@@ -1,6 +1,7 @@
 package xyz.gonzapico.data.entity.mapper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,17 +18,26 @@ import xyz.gonzapico.entity.MovieDomainEntity;
 import xyz.gonzapico.entity.TrailerDomainEntity;
 
 /**
+ * Class in charge of the translation of the entities from the data layer (responses of the API) to the domain layer.
+ *
  * Created by gfernandez on 26/02/17.
  */
 
 @Singleton public class MovieMapper {
 
-  public List<GenreEntity> listOfGenres = new ArrayList<>();
+  // Saved to transform from id to name (genres)
+  private List<GenreEntity> listOfGenres = new ArrayList<>();
 
   @Inject public MovieMapper() {
 
   }
 
+  /***
+   * Method to transform the response of the API to domain entities
+   *
+   * @param responseOfAPI
+   * @return
+   */
   public List<MovieDomainEntity> transformToListOfMovies(Response<MovieAPIResponse> responseOfAPI) {
     List<MovieDomainEntity> movieDomainEntityList = null;
     if (responseOfAPI.isSuccessful()) {
@@ -50,6 +60,12 @@ import xyz.gonzapico.entity.TrailerDomainEntity;
     return movieDomainEntityList;
   }
 
+  /***
+   * Method to transform ids to strings (genres)
+   *
+   * @param genreIds
+   * @return
+   */
   private List<String> transformToGenreName(List<Integer> genreIds) {
     List<String> transformation = new ArrayList<>();
     for (Integer genreId : genreIds) {
@@ -58,6 +74,12 @@ import xyz.gonzapico.entity.TrailerDomainEntity;
     return transformation;
   }
 
+  /***
+   * Method to search an id in the list of genres
+   *
+   * @param genreId
+   * @return
+   */
   private String searchGenreId(int genreId) {
     for (GenreEntity genreEntity : listOfGenres) {
       if (genreEntity.getId() == genreId) {
@@ -67,6 +89,12 @@ import xyz.gonzapico.entity.TrailerDomainEntity;
     return "";
   }
 
+  /***
+   * Genre entity transformation
+   *
+   * @param movieAPIGenreResponse
+   * @return
+   */
   public List<GenreDomainEntity> transformToListOfGenres(
       Response<MovieAPIGenre> movieAPIGenreResponse) {
     List<GenreDomainEntity> listOfGenreDomainEntity = null;
@@ -85,6 +113,12 @@ import xyz.gonzapico.entity.TrailerDomainEntity;
     return listOfGenreDomainEntity;
   }
 
+  /***
+   * Trailers entity transformation
+   * 
+   * @param movieAPITrailer
+   * @return
+   */
   public List<TrailerDomainEntity> transformToListOfTrailers(
       Response<MovieAPITrailer> movieAPITrailer) {
     List<TrailerDomainEntity> resultOfTransformation = null;

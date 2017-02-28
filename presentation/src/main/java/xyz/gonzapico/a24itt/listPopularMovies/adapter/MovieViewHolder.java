@@ -15,6 +15,7 @@ import xyz.gonzapico.a24itt.R;
 
 public class MovieViewHolder extends RecyclerView.ViewHolder {
 
+  CardView cvMovie;
   ImageView ivMoviePoster;
   TextView tvMovieTitle;
 
@@ -22,6 +23,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
     super(itemView);
     ivMoviePoster = (ImageView) itemView.findViewById(R.id.ivMoviePoster);
     tvMovieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
+    cvMovie = (CardView) itemView.findViewById(R.id.cvMovie);
     //ButterKnife.bind(this, itemView);
   }
 }

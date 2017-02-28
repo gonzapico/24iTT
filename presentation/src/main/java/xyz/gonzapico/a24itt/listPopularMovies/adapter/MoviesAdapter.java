@@ -17,6 +17,7 @@ import xyz.gonzapico.a24itt.listPopularMovies.MovieModel;
 public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
   private List<MovieModel> movies;
   private Context mContext;
+  private MoviesAdapter.OnItemClickListener onItemClickListener;
 
   public MoviesAdapter(List<MovieModel> movieList) {
     this.movies = movieList;
@@ -29,9 +30,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
   }
 
   @Override public void onBindViewHolder(MovieViewHolder holder, int position) {
-    MovieModel popularMovie = movies.get(position);
-    holder.tvMovieTitle.setText(popularMovie.getOverview());
+    final MovieModel popularMovie = movies.get(position);
+    holder.tvMovieTitle.setText(popularMovie.getTitle());
     Glide.with(mContext).load(popularMovie.getPoster()).into(holder.ivMoviePoster);
+    holder.cvMovie.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        if (MoviesAdapter.this.onItemClickListener != null) {
+          MoviesAdapter.this.onItemClickListener.onMovieItemClicked(popularMovie);
+        }
+      }
+    });
+  }
+
+  public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+    this.onItemClickListener = onItemClickListener;
   }
 
   @Override public int getItemCount() {
@@ -40,5 +52,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
   @Override public void onAttachedToRecyclerView(RecyclerView recyclerView) {
     super.onAttachedToRecyclerView(recyclerView);
+  }
+
+  public interface OnItemClickListener {
+    void onMovieItemClicked(MovieModel movieModel);
   }
 }

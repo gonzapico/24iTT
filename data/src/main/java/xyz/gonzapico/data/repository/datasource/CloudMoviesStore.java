@@ -9,6 +9,7 @@ import xyz.gonzapico.data.Config;
 import xyz.gonzapico.data.cloud.MovieDBAPIService;
 import xyz.gonzapico.data.di.CloudModule;
 import xyz.gonzapico.data.di.DaggerCloudComponent;
+import xyz.gonzapico.data.entity.MovieAPIGenre;
 import xyz.gonzapico.data.entity.MovieAPIResponse;
 
 /**
@@ -43,5 +44,9 @@ public class CloudMoviesStore implements MoviesDataStore {
 
   @Override public Observable<Response<MovieAPIResponse>> popularMoves() {
     return restApi.popularMovies(Config.API_KEY);
+  }
+
+  @Override public Observable<Response<MovieAPIGenre>> genres() {
+    return restApi.genres(Config.API_KEY);
   }
 }

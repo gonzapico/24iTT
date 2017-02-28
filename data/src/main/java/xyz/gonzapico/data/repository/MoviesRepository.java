@@ -5,8 +5,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import rx.Observable;
 import xyz.gonzapico.data.entity.mapper.MovieMapper;
+import xyz.gonzapico.data.repository.datasource.GenresDataStore;
 import xyz.gonzapico.data.repository.datasource.MoviesDataStore;
 import xyz.gonzapico.data.repository.datasource.MoviesDataStoreFactory;
+import xyz.gonzapico.entity.GenreDomainEntity;
 import xyz.gonzapico.entity.MovieDomainEntity;
 import xyz.gonzapico.repository.MoviesDomainRepository;
 
@@ -28,5 +30,15 @@ import xyz.gonzapico.repository.MoviesDomainRepository;
   @Override public Observable<List<MovieDomainEntity>> getPopularMovies() {
     final MoviesDataStore moviesDataStore = this.movieDataStoreFactory.createCloudDataStore();
     return moviesDataStore.popularMoves().map(this.movieMapper::transformToListOfMovies);
+  }
+
+  @Override public Observable<List<GenreDomainEntity>> getGenres() {
+    final MoviesDataStore moviesDataStore = this.movieDataStoreFactory.createCloudDataStore();
+    return moviesDataStore.genres().map(this.movieMapper::transformToListOfGenres);
+  }
+
+  private void saveGenres(List<GenreDomainEntity> listOfGenreDomainEntity){
+    final GenresDataStore genresDataStore = this.movieDataStoreFactory.createMemoryGenresDataStore();
+    //genresDataStore.saveGenres(this.movieMapper.transformToListOfGenreEntity(listOfGenreDomainEntity));
   }
 }

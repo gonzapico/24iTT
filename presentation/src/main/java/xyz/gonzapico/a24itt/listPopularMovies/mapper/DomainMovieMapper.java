@@ -25,8 +25,12 @@ import xyz.gonzapico.entity.MovieDomainEntity;
     int id = 0;
 
     for (MovieDomainEntity movieDomainEntity : listOfMoviesDomainEntity) {
-      MovieModel movieEntity =
-          new MovieModel(id++, movieDomainEntity.getTitle(), movieDomainEntity.getPosterPath());
+      MovieModel movieEntity = new MovieModel();
+      movieEntity.setId(movieDomainEntity.getId());
+      movieEntity.setTitle(movieDomainEntity.getTitle());
+      movieEntity.setOverview(movieDomainEntity.getOverview());
+      movieEntity.setDate(movieDomainEntity.getReleaseDate());
+      movieEntity.setGenres(movieDomainEntity.getGenreNames());
       resultOfTransformation.add(movieEntity);
     }
 

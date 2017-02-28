@@ -10,8 +10,11 @@ public class MovieEntity {
     private String posterPath;
     private Boolean adult;
     private String overview;
+    @SerializedName("release_date")
     private String releaseDate;
+    @SerializedName("genre_ids")
     private List<Integer> genreIds = null;
+    @SerializedName("id")
     private Integer id;
     private String originalTitle;
     private String originalLanguage;

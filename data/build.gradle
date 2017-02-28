@@ -24,6 +24,11 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 }
+configurations.all {
+  resolutionStrategy {
+    force 'com.android.support:support-annotations:24.2.1'
+  }
+}
 
 dependencies {
   compile project(':domain')
@@ -43,7 +48,9 @@ dependencies {
   compile dataDependencies.retrofitAdapterRx
   compile dataDependencies.okHttpLogging
   compile dataDependencies.glassfishJavax
-  compile dataDependencies.storeNY
+  compile(dataDependencies.storeNY, {
+    exclude group: 'com.google.code.findbugs', module: 'jsr305'
+  })
 
   def testDependencies = rootProject.ext.dataTestDependencies
 

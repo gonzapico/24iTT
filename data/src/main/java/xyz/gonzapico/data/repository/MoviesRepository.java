@@ -10,6 +10,7 @@ import xyz.gonzapico.data.repository.datasource.MoviesDataStore;
 import xyz.gonzapico.data.repository.datasource.MoviesDataStoreFactory;
 import xyz.gonzapico.entity.GenreDomainEntity;
 import xyz.gonzapico.entity.MovieDomainEntity;
+import xyz.gonzapico.entity.TrailerDomainEntity;
 import xyz.gonzapico.repository.MoviesDomainRepository;
 
 /**
@@ -21,20 +22,26 @@ import xyz.gonzapico.repository.MoviesDomainRepository;
   private final MoviesDataStoreFactory movieDataStoreFactory;
   private final MovieMapper movieMapper;
 
+  private MoviesDataStore moviesDataStore = null;
+
   @Inject
   public MoviesRepository(MoviesDataStoreFactory movieDataStoreFactory, MovieMapper movieMapper) {
     this.movieDataStoreFactory = movieDataStoreFactory;
     this.movieMapper = movieMapper;
+
+    moviesDataStore = this.movieDataStoreFactory.createCloudDataStore();
   }
 
   @Override public Observable<List<MovieDomainEntity>> getPopularMovies() {
-    final MoviesDataStore moviesDataStore = this.movieDataStoreFactory.createCloudDataStore();
     return moviesDataStore.popularMoves().map(this.movieMapper::transformToListOfMovies);
   }
 
   @Override public Observable<List<GenreDomainEntity>> getGenres() {
-    final MoviesDataStore moviesDataStore = this.movieDataStoreFactory.createCloudDataStore();
     return moviesDataStore.genres().map(this.movieMapper::transformToListOfGenres);
+  }
+
+  @Override public Observable<List<TrailerDomainEntity>> getTrailers(int idMovie) {
+    return moviesDataStore.trailers(idMovie).map(this.movieMapper::transformToListOfTrailers);
   }
 
   private void saveGenres(List<GenreDomainEntity> listOfGenreDomainEntity){

@@ -79,7 +79,7 @@ public class CloudMoviesStore implements MoviesDataStore {
   }
 
   @Override public Observable<Response<MovieAPITrailer>> trailers(int idMovie) {
-    return restApi.trailers(idMovie, Config.API_KEY);
+    return getTrailers(idMovie);
   }
 
   private Observable<Response<MovieAPITrailer>> getTrailers(int idMovie) {
